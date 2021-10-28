@@ -12,14 +12,14 @@ const crudArr = ["get", "post", "put", "patch", "delete"];
 
 fs.promises.mkdir(path.join(process.cwd(), 'src', 'api', argv));
 
-let indexRes = "";
+let indexRes:string;
+let lastImport: number;
+let lastRoute: number;
+
 
 fs.readFile(path.join(process.cwd(), 'src', 'api', "index.ts"), function(err: NodeJS.ErrnoException | null, data: object) {
   if(err) throw err;
-
-  let lastImport = 0;
-  let lastRoute = 0;
-
+ 
   const arr = data.toString().replace(/\r\n/g,'\n').split('\n');
 
   arr.forEach((elem: string, index: number) => {
